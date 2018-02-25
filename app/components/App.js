@@ -33,6 +33,14 @@ class App extends Component {
     console.log('Entrada: ', this.state.nameInput, this.state.passInput);
     ApiService.isRegister(this.state.nameInput, this.state.passInput).then(res => {
       console.log(res);
+
+      // **** Testar registro ****
+      ApiService.registerUser('ilma', '12356').then(res => {
+        console.log('Registro: ', res);
+      }).catch(err => {
+        console.log('Registro: ', err);
+      });
+
     }).catch(err => {
       console.log(err);
     });
