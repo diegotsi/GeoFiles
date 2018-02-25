@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 // import img from '../assets/images/react_logo_512x512.png';
+import ApiService from './../services/ApiServices';
+
+const style = {
+  cont: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 'calc(100vh - 80px)',
+  },
+}
 
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = { nameInput: '', passInput: '' };
   }
 
@@ -21,11 +31,16 @@ class App extends Component {
   // Submit.
   submit = () => {
     console.log('Entrada: ', this.state.nameInput, this.state.passInput);
+    ApiService.isRegister(this.state.nameInput, this.state.passInput).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
   render() {
     return (
-      <div>
+      <div style={style.cont}>
         <input type="text" onChange={this.nameInput} value={this.state.nameInput} placeholder="Usuário" />
         <input type="text" onChange={this.passInput} value={this.state.passInput} placeholder="Senha" />
         <button onClick={this.submit}>Login</button>
